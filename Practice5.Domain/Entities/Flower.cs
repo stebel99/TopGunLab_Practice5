@@ -10,6 +10,10 @@ namespace Practice5.Domain.Entities
         [MaxLength(25)]
         public string Name { get; set; }
 
+        [Required]
+        [MaxLength(25)]
+        public string Color { get; set; }
+
         public ICollection<PlantationFlower> PlantationFlowers { get; set; }
         public ICollection<SupplyFlower> SupplyFlowers { get; set; }
         public ICollection<WarehouseFlower> WarehouseFlowers { get; set; }
