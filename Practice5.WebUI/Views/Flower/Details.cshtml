@@ -26,9 +26,36 @@
             @Html.DisplayFor(model => model.Color)
         </dd>
 
+        <dt>
+            @Html.DisplayName("Plantations")
+        </dt>
+        @{var plantations = Model?.PlantationFlowers?.Where(x => x?.FlowerId == Model?.Id);
+            if (plantations != null)
+            {
+                foreach (var plantation in plantations)
+                {
+                    <dd>
+                        @plantation.Plantation.Name
+                    </dd>
+                }
+            }
+            <dd>
+                -
+            </dd>
+        }
+        <dt>
+            @Html.DisplayName("Test")
+        </dt>
+        @for (int i = 0; i < 10; i++)
+        {
+            <dd>
+                @i
+            </dd>
+        }
+
     </dl>
 </div>
 <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new {@class ="btn btn-primary" }) 
-        @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
 </p>

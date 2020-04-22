@@ -8,17 +8,22 @@ using System.Web;
 using System.Web.Mvc;
 using Practice5.Domain;
 using Practice5.Domain.Entities;
+using Practice5.WebUI.Repositories.Interfaces;
 
 namespace Practice5.WebUI.Controllers
 {
     public class PlantationController : Controller
     {
-        private FlowerDbContext db = new FlowerDbContext();
+        private IPlantationRepository plantationRepository;
+        public PlantationController(IPlantationRepository plantationRepository)
+        {
+            this.plantationRepository = plantationRepository;
+        }
 
         // GET: Plantation
         public ActionResult Index()
         {
-            return View(db.Plantations.ToList());
+            return View(plantationRepository.GetPlantations());
         }
 
         // GET: Plantation/Details/5
@@ -28,7 +33,7 @@ namespace Practice5.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plantation plantation = db.Plantations.Find(id);
+            Plantation plantation = plantationRepository.GetPlantation(id.Value);
             if (plantation == null)
             {
                 return HttpNotFound();
@@ -51,8 +56,7 @@ namespace Practice5.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Plantations.Add(plantation);
-                db.SaveChanges();
+                plantationRepository.CreatePlantation(plantation);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +70,7 @@ namespace Practice5.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plantation plantation = db.Plantations.Find(id);
+            Plantation plantation = plantationRepository.GetPlantation(id.Value);
             if (plantation == null)
             {
                 return HttpNotFound();
@@ -83,8 +87,7 @@ namespace Practice5.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(plantation).State = EntityState.Modified;
-                db.SaveChanges();
+                plantationRepository.UpdatePlantation(plantation);
                 return RedirectToAction("Index");
             }
             return View(plantation);
@@ -97,7 +100,7 @@ namespace Practice5.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plantation plantation = db.Plantations.Find(id);
+            Plantation plantation = plantationRepository.GetPlantation(id.Value);
             if (plantation == null)
             {
                 return HttpNotFound();
@@ -110,19 +113,8 @@ namespace Practice5.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Plantation plantation = db.Plantations.Find(id);
-            db.Plantations.Remove(plantation);
-            db.SaveChanges();
+            plantationRepository.DeletePlantation(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

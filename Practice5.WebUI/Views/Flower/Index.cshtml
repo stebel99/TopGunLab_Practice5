@@ -17,6 +17,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Color)
         </th>
+        <th>
+            @Html.DisplayName("Plantations")
+        </th>
+        <th>
+            @Html.DisplayName("Warehouses")
+        </th>
+        <th>
+            @Html.DisplayName("Supplies")
+        </th>
         <th></th>
     </tr>
 
@@ -30,9 +39,30 @@
                 @Html.DisplayFor(modelItem => item.Color)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                @{
+                    string variable = item.PlantationFlowers?.Count().ToString();
+                    if (variable.IsEmpty()) { variable = "0"; }
+                }
+                @Html.DisplayFor(modelItem => variable)
+            </td>
+            <td>
+                @{
+                    variable = item.WarehouseFlowers?.Count().ToString();
+                    if (variable.IsEmpty()) { variable = "0"; }
+                }
+                @Html.DisplayFor(modelItem => variable)
+            </td>
+            <td>
+                @{
+                    variable = item.SupplyFlowers?.Count().ToString();
+                    if (variable.IsEmpty()) { variable = "0"; }
+                }
+                @Html.DisplayFor(modelItem => variable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

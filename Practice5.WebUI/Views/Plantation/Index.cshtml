@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Plantations</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", "Plantation", null, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -17,23 +17,44 @@
         <th>
             @Html.DisplayNameFor(model => model.Adress)
         </th>
+        <th>
+            @Html.DisplayName("Flowers")
+        </th>
+        <th>
+            @Html.DisplayName("Supplies")
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Adress)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @{
+                    string variable = item.PlantationFlowers?.Count().ToString();
+                    if (variable.IsEmpty()) { variable = "0"; }
+                }
+                @Html.DisplayFor(modelItem => variable)
+            </td>
+            <td>
+                @{
+                    variable = item.Supplies?.Count().ToString();
+                    if (variable.IsEmpty()) { variable = "0"; }
+                }
+                @Html.DisplayFor(modelItem => variable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>

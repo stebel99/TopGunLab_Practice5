@@ -3,6 +3,7 @@ using Practice5.Domain.Entities;
 using Practice5.WebUI.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using Unity;
@@ -16,6 +17,9 @@ namespace Practice5.WebUI.Repositories
         public FlowerDbContext DbContext { get; set; }
         public void CreateFlower(Flower flower)
         {
+            flower.PlantationFlowers = new Collection<PlantationFlower>();
+            flower.WarehouseFlowers = new Collection<WarehouseFlower>();
+            flower.SupplyFlowers = new Collection<SupplyFlower>();
             DbContext.Flowers.Add(flower);
             DbContext.SaveChanges();
         }
