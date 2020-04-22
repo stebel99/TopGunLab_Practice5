@@ -8,7 +8,9 @@ namespace Practice5.Domain.Entities.Abstract
         [Required]
         public int Amount { get; set; }
 
-
+        [Key]
+        [Column(Order = 1)]
+        [ForeignKey("Flower")]
         public int FlowerId { get; set; }
         public Flower Flower { get; set; }
     }

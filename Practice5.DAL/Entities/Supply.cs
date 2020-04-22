@@ -2,13 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Practice5.Domain.Entities
 {
     public class Supply : BaseEntity
     {
+        [ForeignKey("Plantation")]
         public int PlantationId { get; set; }
         public Plantation Plantation { get; set; }
+
+        [ForeignKey("Warehouse")]
         public int WarehouseId { get; set; }
         public Warehouse Warehouse { get; set; }
 
