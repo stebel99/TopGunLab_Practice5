@@ -1,37 +1,46 @@
-﻿using Practice5.Domain.Entities;
+﻿using Practice5.Domain;
+using Practice5.Domain.Entities;
 using Practice5.WebUI.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Unity;
 
 namespace Practice5.WebUI.Repositories
 {
     public class FlowerRepository : IFlowerRepository
     {
+
+        [Dependency]
+        public FlowerDbContext DbContext { get; set; }
         public void CreateFlower(Flower flower)
         {
-            throw new NotImplementedException();
+            DbContext.Flowers.Add(flower);
+            DbContext.SaveChanges();
         }
 
         public void DeleteFlower(int id)
         {
-            throw new NotImplementedException();
+            Flower flower = DbContext.Flowers.Find(id);
+            DbContext.Entry(flower).State = System.Data.Entity.EntityState.Deleted;
+            DbContext.SaveChanges();
         }
 
         public Flower GetFlower(int id)
         {
-            throw new NotImplementedException();
+            return DbContext.Flowers.Where(s => s.Id == id).FirstOrDefault();
         }
 
         public IEnumerable<Flower> GetFlowers()
         {
-            throw new NotImplementedException();
+            return DbContext.Flowers.ToList();
         }
 
-        public void UpdateFlower(int id)
+        public void UpdateFlower(Flower flower)
         {
-            throw new NotImplementedException();
+            DbContext.Entry(flower).State = System.Data.Entity.EntityState.Modified;
+            DbContext.SaveChanges();
         }
     }
 }

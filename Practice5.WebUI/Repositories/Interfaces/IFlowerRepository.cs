@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Practice5.WebUI.Repositories.Interfaces
 {
-    interface IFlowerRepository
+    public interface IFlowerRepository
     {
         IEnumerable<Flower> GetFlowers();
         Flower GetFlower(int id);
         void CreateFlower(Flower flower);
-        void UpdateFlower(int id);
+        void UpdateFlower(Flower flower);
         void DeleteFlower(int id);
     }
 }

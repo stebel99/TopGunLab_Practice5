@@ -8,17 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using Practice5.Domain;
 using Practice5.Domain.Entities;
+using Practice5.WebUI.Repositories.Interfaces;
 
 namespace Practice5.WebUI.Controllers
 {
     public class FlowerController : Controller
     {
-        private FlowerDbContext db = new FlowerDbContext();
-
+        private IFlowerRepository flowerRepository;
+        public FlowerController(IFlowerRepository flowerRepository)
+        {
+            this.flowerRepository = flowerRepository;
+        }
         // GET: Flowers
         public ActionResult Index()
         {
-            return View(db.Flowers.ToList());
+            return View(flowerRepository.GetFlowers());
         }
 
         // GET: Flowers/Details/5
@@ -28,7 +32,7 @@ namespace Practice5.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Flower flower = db.Flowers.Find(id);
+            Flower flower = flowerRepository.GetFlower(id.Value);
             if (flower == null)
             {
                 return HttpNotFound();
@@ -51,8 +55,7 @@ namespace Practice5.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Flowers.Add(flower);
-                db.SaveChanges();
+                flowerRepository.CreateFlower(flower);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +69,7 @@ namespace Practice5.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Flower flower = db.Flowers.Find(id);
+            Flower flower = flowerRepository.GetFlower(id.Value);
             if (flower == null)
             {
                 return HttpNotFound();
@@ -83,8 +86,7 @@ namespace Practice5.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(flower).State = EntityState.Modified;
-                db.SaveChanges();
+                flowerRepository.UpdateFlower(flower);
                 return RedirectToAction("Index");
             }
             return View(flower);
@@ -97,7 +99,7 @@ namespace Practice5.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Flower flower = db.Flowers.Find(id);
+            Flower flower = flowerRepository.GetFlower(id.Value);
             if (flower == null)
             {
                 return HttpNotFound();
@@ -110,19 +112,8 @@ namespace Practice5.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Flower flower = db.Flowers.Find(id);
-            db.Flowers.Remove(flower);
-            db.SaveChanges();
+            flowerRepository.DeleteFlower(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
