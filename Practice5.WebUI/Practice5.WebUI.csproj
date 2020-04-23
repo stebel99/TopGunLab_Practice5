@@ -142,7 +142,7 @@
     <Compile Include="Controllers\FlowerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlantationController.cs" />
-    <Compile Include="Controllers\PlantationFlowersController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,7 +150,9 @@
     <Compile Include="Repositories\FlowerRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFlowerRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPlantationRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IWarehouseRepository.cs" />
     <Compile Include="Repositories\PlantationRepository.cs" />
+    <Compile Include="Repositories\WarehouseRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -196,11 +198,11 @@
     <Content Include="Views\Plantation\Details.cshtml" />
     <Content Include="Views\Plantation\Edit.cshtml" />
     <Content Include="Views\Plantation\Index.cshtml" />
-    <Content Include="Views\PlantationFlowers\Create.cshtml" />
-    <Content Include="Views\PlantationFlowers\Delete.cshtml" />
-    <Content Include="Views\PlantationFlowers\Details.cshtml" />
-    <Content Include="Views\PlantationFlowers\Edit.cshtml" />
-    <Content Include="Views\PlantationFlowers\Index.cshtml" />
+    <Content Include="Views\Warehouse\Create.cshtml" />
+    <Content Include="Views\Warehouse\Delete.cshtml" />
+    <Content Include="Views\Warehouse\Details.cshtml" />
+    <Content Include="Views\Warehouse\Edit.cshtml" />
+    <Content Include="Views\Warehouse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

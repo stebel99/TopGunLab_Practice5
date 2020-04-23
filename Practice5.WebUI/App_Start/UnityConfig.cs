@@ -16,6 +16,8 @@ namespace Practice5.WebUI
             // it is NOT necessary to register your controllers
             container.RegisterType<IFlowerRepository, FlowerRepository>();
             container.RegisterType<IPlantationRepository, PlantationRepository>();
+            container.RegisterType<IWarehouseRepository, WarehouseRepository>();
+
             // e.g. container.RegisterType<ITestService, TestService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
