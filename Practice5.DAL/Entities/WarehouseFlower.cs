@@ -6,10 +6,8 @@ namespace Practice5.Domain.Entities
 {
     public class WarehouseFlower : BaseIntermediateTable
     {
-        [Key]
-        [Column(Order = 2)]
-        [ForeignKey("Warehouse")]
-        public int WarehouseId { get; set; }
+        public int? WarehouseId { get; set; }
+        [ForeignKey("WarehouseId")]
         public Warehouse Warehouse { get; set; }
     }
 }

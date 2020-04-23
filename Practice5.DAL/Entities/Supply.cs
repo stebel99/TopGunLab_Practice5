@@ -8,19 +8,20 @@ namespace Practice5.Domain.Entities
 {
     public class Supply : BaseEntity
     {
-        [ForeignKey("Plantation")]
-        public int PlantationId { get; set; }
+        public int? PlantationId { get; set; }
+        [ForeignKey("PlantationId")]
         public Plantation Plantation { get; set; }
 
-        [ForeignKey("Warehouse")]
-        public int WarehouseId { get; set; }
+        public int? WarehouseId { get; set; }
+        [ForeignKey("WarehouseId")]
         public Warehouse Warehouse { get; set; }
 
         [Required]
         public DateTime ScheduledDate { get; set; }
         public DateTime? ClosedDate { get; set; }
 
-        [MaxLength(10)]
+        [Required]
+        [MaxLength(15)]
         public string Status { get; set; }
 
         public ICollection<SupplyFlower> SupplyFlowers { get; set; }

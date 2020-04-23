@@ -5,7 +5,7 @@ namespace Practice5.Domain
 {
     public class FlowerDbContext : DbContext
     {
-        public FlowerDbContext() : base("FlowerIndustryDb")
+        public FlowerDbContext() : base()
         {
         }
         public virtual DbSet<Flower> Flowers { get; set; }

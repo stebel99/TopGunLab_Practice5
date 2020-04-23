@@ -8,10 +8,12 @@ namespace Practice5.Domain.Entities
     {
         [Required]
         [MaxLength(25)]
+        [Display(Name="Flower Name")]
         public string Name { get; set; }
 
         [Required]
         [MaxLength(25)]
+        [Display(Name = "Flower Color")]
         public string Color { get; set; }
 
         public Flower()

@@ -6,10 +6,8 @@ namespace Practice5.Domain.Entities
 {
     public class SupplyFlower: BaseIntermediateTable
     {
-        [Key]
-        [Column(Order = 2)]
-        [ForeignKey("Supply")]
         public int SupplyId { get; set; }
+        [ForeignKey("SupplyId")]
         public Supply Supply { get; set; }
     }
 }

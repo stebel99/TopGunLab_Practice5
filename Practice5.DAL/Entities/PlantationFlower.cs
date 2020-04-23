@@ -6,10 +6,8 @@ namespace Practice5.Domain.Entities
 {
     public class PlantationFlower : BaseIntermediateTable
     {
-        [Key]
-        [Column(Order = 2)]
-        [ForeignKey("Plantation")]
-        public int PlantationId { get; set; }
+        public int? PlantationId { get; set; }
+        [ForeignKey("PlantationId")]
         public Plantation Plantation { get; set; }
     }
 }
