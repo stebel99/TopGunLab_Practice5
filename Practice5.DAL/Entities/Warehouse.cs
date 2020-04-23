@@ -7,5 +7,11 @@ namespace Practice5.Domain.Entities
     {
         public ICollection<WarehouseFlower> WarehouseFlowers { get; set; }
         public ICollection<Supply> Supplies { get; set; }
+
+        public Warehouse()
+        {
+            WarehouseFlowers = new List<WarehouseFlower>();
+            Supplies = new List<Supply>();
+        }
     }
 }

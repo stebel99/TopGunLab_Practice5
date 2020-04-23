@@ -24,5 +24,10 @@ namespace Practice5.Domain.Entities
         public string Status { get; set; }
 
         public ICollection<SupplyFlower> SupplyFlowers { get; set; }
+
+        public Supply()
+        {
+            SupplyFlowers = new List<SupplyFlower>();
+        }
     }
 }
