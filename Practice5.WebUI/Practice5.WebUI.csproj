@@ -142,6 +142,7 @@
     <Compile Include="Controllers\FlowerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlantationController.cs" />
+    <Compile Include="Controllers\PlantationFlowersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +196,11 @@
     <Content Include="Views\Plantation\Details.cshtml" />
     <Content Include="Views\Plantation\Edit.cshtml" />
     <Content Include="Views\Plantation\Index.cshtml" />
+    <Content Include="Views\PlantationFlowers\Create.cshtml" />
+    <Content Include="Views\PlantationFlowers\Delete.cshtml" />
+    <Content Include="Views\PlantationFlowers\Details.cshtml" />
+    <Content Include="Views\PlantationFlowers\Edit.cshtml" />
+    <Content Include="Views\PlantationFlowers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
