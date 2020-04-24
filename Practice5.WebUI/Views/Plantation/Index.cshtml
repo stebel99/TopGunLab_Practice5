@@ -17,12 +17,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Adress)
         </th>
-        <th>
-            @Html.DisplayName("Flowers")
-        </th>
-        <th>
-            @Html.DisplayName("Supplies")
-        </th>
         <th></th>
     </tr>
 
@@ -34,20 +28,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Adress)
-            </td>
-            <td>
-                @{
-                    string variable = item.PlantationFlowers?.Count().ToString();
-                    if (variable.IsEmpty()) { variable = "0"; }
-                }
-                @Html.DisplayFor(modelItem => variable)
-            </td>
-            <td>
-                @{
-                    variable = item.Supplies?.Count().ToString();
-                    if (variable.IsEmpty()) { variable = "0"; }
-                }
-                @Html.DisplayFor(modelItem => variable)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
