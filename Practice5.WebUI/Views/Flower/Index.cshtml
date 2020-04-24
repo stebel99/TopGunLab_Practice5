@@ -17,15 +17,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Color)
         </th>
-        <th>
-            @Html.DisplayName("Plantations")
-        </th>
-        <th>
-            @Html.DisplayName("Warehouses")
-        </th>
-        <th>
-            @Html.DisplayName("Supplies")
-        </th>
         <th></th>
     </tr>
 
@@ -37,27 +28,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @{
-                    string variable = item.PlantationFlowers?.Count().ToString();
-                    if (variable.IsEmpty()) { variable = "0"; }
-                }
-                @Html.DisplayFor(modelItem => variable)
-            </td>
-            <td>
-                @{
-                    variable = item.WarehouseFlowers?.Count().ToString();
-                    if (variable.IsEmpty()) { variable = "0"; }
-                }
-                @Html.DisplayFor(modelItem => variable)
-            </td>
-            <td>
-                @{
-                    variable = item.SupplyFlowers?.Count().ToString();
-                    if (variable.IsEmpty()) { variable = "0"; }
-                }
-                @Html.DisplayFor(modelItem => variable)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })

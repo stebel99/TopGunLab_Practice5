@@ -13,6 +13,7 @@ namespace Practice5.WebUI.Repositories.Interfaces
         IEnumerable<Plantation> GetPlantations();
         Plantation GetPlantation(int id);
         void CreatePlantation(Plantation plantation);
+        void CreatePlFl(PlantationFlower plantationFlower);
         void UpdatePlantation(Plantation plantation);
         void DeletePlantation(int id);
     }

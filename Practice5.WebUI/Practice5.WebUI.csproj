@@ -142,6 +142,8 @@
     <Compile Include="Controllers\FlowerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlantationController.cs" />
+    <Compile Include="Controllers\SupplyController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,10 +205,17 @@
     <Content Include="Views\Warehouse\Details.cshtml" />
     <Content Include="Views\Warehouse\Edit.cshtml" />
     <Content Include="Views\Warehouse\Index.cshtml" />
+    <Content Include="Views\Supply\Create.cshtml" />
+    <Content Include="Views\Supply\Delete.cshtml" />
+    <Content Include="Views\Supply\Details.cshtml" />
+    <Content Include="Views\Supply\Edit.cshtml" />
+    <Content Include="Views\Supply\Index.cshtml" />
+    <Content Include="Views\Plantation\AddFlowers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

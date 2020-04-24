@@ -15,9 +15,12 @@ namespace Practice5.WebUI.Controllers
     public class PlantationController : Controller
     {
         private IPlantationRepository plantationRepository;
-        public PlantationController(IPlantationRepository plantationRepository)
+        private IFlowerRepository flowerRepository;
+
+        public PlantationController(IPlantationRepository plantationRepository, IFlowerRepository flowerRepository)
         {
             this.plantationRepository = plantationRepository;
+            this.flowerRepository = flowerRepository;
         }
 
         // GET: Plantation
@@ -63,6 +66,24 @@ namespace Practice5.WebUI.Controllers
             return View(plantation);
         }
 
+        public ActionResult AddFlowers() 
+        {
+            ViewBag.FlowerId = new SelectList(flowerRepository.GetFlowers(), "Id", "Name");
+            ViewBag.PlantationId = new SelectList(plantationRepository.GetPlantations(), "Id", "Name");
+            return View(new PlantationFlower());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddFlowers([Bind(Include = "Id,PlantationId,FlowerId,Amount")] PlantationFlower plantationflower)
+        {
+            if (ModelState.IsValid)
+            {
+                plantationRepository.CreatePlFl(plantationflower);
+                return RedirectToAction("Index");
+            }
+
+            return View(plantationflower);
+        }
         // GET: Plantation/Edit/5
         public ActionResult Edit(int? id)
         {

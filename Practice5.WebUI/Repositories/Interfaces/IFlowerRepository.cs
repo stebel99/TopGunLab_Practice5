@@ -10,5 +10,10 @@ namespace Practice5.WebUI.Repositories.Interfaces
         void CreateFlower(Flower flower);
         void UpdateFlower(Flower flower);
         void DeleteFlower(int id);
+
+        int GetNumberPlantations(int flowerId);
+        int GetNumberWarehouses(int flowerId);
+        int GetNumberSupplies(int flowerId);
+
     }
 }

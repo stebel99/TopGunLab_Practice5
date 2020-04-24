@@ -29,29 +29,21 @@
         <dt>
             @Html.DisplayName("Plantations")
         </dt>
-        @{var plantations = Model?.PlantationFlowers?.Where(x => x?.FlowerId == Model?.Id);
-            if (plantations != null)
-            {
-                foreach (var plantation in plantations)
-                {
-                    <dd>
-                        @plantation.Plantation.Name
-                    </dd>
-                }
-            }
-            <dd>
-                -
-            </dd>
-        }
+        <dd>
+            @ViewBag.NumberPl
+        </dd>
         <dt>
-            @Html.DisplayName("Test")
+            @Html.DisplayName("Warehouses")
         </dt>
-        @for (int i = 0; i < 10; i++)
-        {
-            <dd>
-                @i
-            </dd>
-        }
+        <dd>
+            @ViewBag.NumberWa
+        </dd>
+        <dt>
+            @Html.DisplayName("Supplies")
+        </dt>
+        <dd>
+            @ViewBag.NumberSu
+        </dd>
 
     </dl>
 </div>

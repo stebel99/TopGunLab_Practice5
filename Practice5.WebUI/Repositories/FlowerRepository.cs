@@ -17,9 +17,6 @@ namespace Practice5.WebUI.Repositories
         public FlowerDbContext DbContext { get; set; }
         public void CreateFlower(Flower flower)
         {
-            flower.PlantationFlowers = new Collection<PlantationFlower>();
-            flower.WarehouseFlowers = new Collection<WarehouseFlower>();
-            flower.SupplyFlowers = new Collection<SupplyFlower>();
             DbContext.Flowers.Add(flower);
             DbContext.SaveChanges();
         }
@@ -39,6 +36,27 @@ namespace Practice5.WebUI.Repositories
         public IEnumerable<Flower> GetFlowers()
         {
             return DbContext.Flowers.ToList();
+        }
+
+        public int GetNumberPlantations(int flowerId)
+        {
+            var number = DbContext.PlantationFlowers?.Where(x => x.FlowerId == flowerId).Count();
+            int result = number == null ? 0 : number.Value;
+            return result;
+        }
+
+        public int GetNumberSupplies(int flowerId)
+        {
+            var number = DbContext.SupplyFlowers?.Where(x => x.FlowerId == flowerId).Count();
+            int result = number == null ? 0 : number.Value;
+            return result;
+        }
+
+        public int GetNumberWarehouses(int flowerId)
+        {
+            var number = DbContext.WarehouseFlowers?.Where(x => x.FlowerId == flowerId).Count();
+            int result = number == null ? 0 : number.Value;
+            return result;
         }
 
         public void UpdateFlower(Flower flower)

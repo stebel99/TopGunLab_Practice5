@@ -37,6 +37,9 @@ namespace Practice5.WebUI.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.NumberPl = flowerRepository.GetNumberPlantations(id.Value);
+            ViewBag.NumberWa = flowerRepository.GetNumberWarehouses(id.Value);
+            ViewBag.NumberSu = flowerRepository.GetNumberSupplies(id.Value);
             return View(flower);
         }
 

@@ -23,6 +23,23 @@ namespace Practice5.WebUI.Repositories
             DbContext.SaveChanges();
         }
 
+        public void CreatePlFl(PlantationFlower plantationFlower)
+        {
+            plantationFlower.Flower = DbContext.Flowers.Find(plantationFlower.FlowerId);
+            plantationFlower.Plantation = DbContext.Plantations.Find(plantationFlower.PlantationId);
+            DbContext.PlantationFlowers.Add(plantationFlower);
+
+            Flower flower = plantationFlower.Flower;
+            flower.PlantationFlowers.Add(plantationFlower);
+            DbContext.Entry(flower).State = System.Data.Entity.EntityState.Modified;
+
+            Plantation plantation = plantationFlower.Plantation;
+            plantation.PlantationFlowers.Add(plantationFlower);
+            DbContext.Entry(plantation).State = System.Data.Entity.EntityState.Modified;
+
+            DbContext.SaveChanges();
+        }
+
         public void DeletePlantation(int id)
         {
             Plantation plantation = DbContext.Plantations.Find(id);
