@@ -8,6 +8,9 @@
 
 <div>
     <h4>Plantation</h4>
+    <p>
+        @Html.ActionLink("Add Flowers", "AddFlowers", new { id = Model.Id }, new { @class = "btn btn-success" })
+    </p>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -25,12 +28,24 @@
         <dd>
             @Html.DisplayFor(model => model.Adress)
         </dd>
-
+        <dt>
+            @Html.DisplayName("Flowers")
+        </dt>
+        @foreach (var item in (IEnumerable<Practice5.WebUI.Models.FlowersAmountViewModel>)ViewBag.FlowersInfo)
+        {
+            <dd>
+                @item.Name
+                @item.Amount
+                <div>
+                    @Html.ActionLink("Edit", "", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Remove", "", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                </div>
+            </dd>
+        }
+      
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Add Flowers", "AddFlowers", new { id = Model.Id }, new { @class = "btn btn-success" })
-</p>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })

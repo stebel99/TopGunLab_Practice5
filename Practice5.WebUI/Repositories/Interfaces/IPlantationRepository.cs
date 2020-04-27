@@ -16,5 +16,6 @@ namespace Practice5.WebUI.Repositories.Interfaces
         void CreatePlFl(PlantationFlower plantationFlower);
         void UpdatePlantation(Plantation plantation);
         void DeletePlantation(int id);
+        dynamic GetFlowersInPlantation(int plantationId);
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Practice5.Domain;
 using Practice5.Domain.Entities;
+using Practice5.WebUI.Models;
 using Practice5.WebUI.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using Unity;
@@ -25,18 +27,7 @@ namespace Practice5.WebUI.Repositories
 
         public void CreatePlFl(PlantationFlower plantationFlower)
         {
-            plantationFlower.Flower = DbContext.Flowers.Find(plantationFlower.FlowerId);
-            plantationFlower.Plantation = DbContext.Plantations.Find(plantationFlower.PlantationId);
             DbContext.PlantationFlowers.Add(plantationFlower);
-
-            Flower flower = plantationFlower.Flower;
-            flower.PlantationFlowers.Add(plantationFlower);
-            DbContext.Entry(flower).State = System.Data.Entity.EntityState.Modified;
-
-            Plantation plantation = plantationFlower.Plantation;
-            plantation.PlantationFlowers.Add(plantationFlower);
-            DbContext.Entry(plantation).State = System.Data.Entity.EntityState.Modified;
-
             DbContext.SaveChanges();
         }
 
@@ -45,6 +36,20 @@ namespace Practice5.WebUI.Repositories
             Plantation plantation = DbContext.Plantations.Find(id);
             DbContext.Entry(plantation).State = System.Data.Entity.EntityState.Deleted;
             DbContext.SaveChanges();
+        }
+
+        public dynamic GetFlowersInPlantation(int plantationId)
+        {
+            var result = from pf in DbContext.PlantationFlowers
+                         join flower in DbContext.Flowers on pf.FlowerId equals flower.Id 
+                         where pf.PlantationId == plantationId
+                         select new FlowersAmountViewModel
+                         {
+                             Id = pf.Id,
+                             Name = flower.Name,
+                             Amount = pf.Amount
+                         };
+            return result;
         }
 
         public Plantation GetPlantation(int id)

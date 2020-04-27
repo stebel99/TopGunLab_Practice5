@@ -41,6 +41,8 @@ namespace Practice5.WebUI.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.FlowersInfo = plantationRepository.GetFlowersInPlantation(id.Value);
+            
             return View(plantation);
         }
 
