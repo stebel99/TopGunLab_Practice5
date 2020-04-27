@@ -37,8 +37,8 @@
                 @item.Name
                 @item.Amount
                 <div>
-                    @Html.ActionLink("Edit", "", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
-                    @Html.ActionLink("Remove", "", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                    @Html.ActionLink("Edit", "EditPlantationFlowers", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Remove", "DeletePlFl", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
                 </div>
             </dd>
         }

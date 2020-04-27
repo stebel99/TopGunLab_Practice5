@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Practice5.Domain;
 using Practice5.Domain.Entities;
 using Practice5.WebUI.Repositories.Interfaces;
@@ -87,6 +88,35 @@ namespace Practice5.WebUI.Controllers
             return View(plantationflower);
         }
         // GET: Plantation/Edit/5
+        public ActionResult EditPlantationFlowers(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PlantationFlower plantationFlower = plantationRepository.GetPlFl(id.Value);
+            if (plantationFlower == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.FlowerId = new SelectList(flowerRepository.GetFlowers(), "Id", "Name", plantationFlower.FlowerId);
+            ViewBag.PlantationId = new SelectList(plantationRepository.GetPlantations(), "Id", "Name", plantationFlower.PlantationId);
+            return View(plantationFlower);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPlantationFlowers([Bind(Include = "Id,PlantationId,Amount,FlowerId")] PlantationFlower plantationFlower)
+        {
+            if (ModelState.IsValid)
+            {
+                plantationRepository.UpdatePlFl(plantationFlower);
+                return RedirectToAction("Index");
+            }
+            ViewBag.FlowerId = new SelectList(flowerRepository.GetFlowers(), "Id", "Name", plantationFlower.FlowerId);
+            ViewBag.PlantationId = new SelectList(plantationRepository.GetPlantations(), "Id", "Name", plantationFlower.PlantationId);
+            return View(plantationFlower);
+        }
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -137,6 +167,17 @@ namespace Practice5.WebUI.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             plantationRepository.DeletePlantation(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeletePlFl(int id)
+        {
+            PlantationFlower plantationFlower = plantationRepository.GetPlFl(id);
+            if (plantationFlower == null)
+            {
+                return HttpNotFound();
+            }
+            plantationRepository.DeletePlFl(id);
             return RedirectToAction("Index");
         }
     }

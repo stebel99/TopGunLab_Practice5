@@ -212,6 +212,7 @@
     <Content Include="Views\Supply\Edit.cshtml" />
     <Content Include="Views\Supply\Index.cshtml" />
     <Content Include="Views\Plantation\AddFlowers.cshtml" />
+    <Content Include="Views\Plantation\EditPlantationFlowers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

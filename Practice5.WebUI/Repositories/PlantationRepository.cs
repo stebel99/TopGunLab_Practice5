@@ -38,6 +38,13 @@ namespace Practice5.WebUI.Repositories
             DbContext.SaveChanges();
         }
 
+        public void DeletePlFl(int id)
+        {
+            PlantationFlower plantationFlower = DbContext.PlantationFlowers.Find(id);
+            DbContext.Entry(plantationFlower).State = System.Data.Entity.EntityState.Deleted;
+            DbContext.SaveChanges();
+        }
+
         public dynamic GetFlowersInPlantation(int plantationId)
         {
             var result = from pf in DbContext.PlantationFlowers
@@ -62,9 +69,20 @@ namespace Practice5.WebUI.Repositories
             return DbContext.Plantations.ToList();
         }
 
+        public PlantationFlower GetPlFl(int id)
+        {
+            return DbContext.PlantationFlowers.Where(s => s.Id == id).FirstOrDefault();
+        }
+
         public void UpdatePlantation(Plantation plantation)
         {
             DbContext.Entry(plantation).State = System.Data.Entity.EntityState.Modified;
+            DbContext.SaveChanges();
+        }
+
+        public void UpdatePlFl(PlantationFlower idplantationFlower)
+        {
+            DbContext.Entry(idplantationFlower).State = System.Data.Entity.EntityState.Modified;
             DbContext.SaveChanges();
         }
     }
